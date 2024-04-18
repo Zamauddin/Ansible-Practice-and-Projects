@@ -3,17 +3,23 @@
   hosts: all
   tasks:
     - name: installing git
-      yum: name=git state=present
+      yum:
+       name: git
+       state: present
       tags: a
-    - name: installing maven
-      yum: name=maven state=present
+    - name: installing httpd
+      yum:
+        name: maven
+        state: present
       tags: b
     - name: create user
-      user: name=rolex state=present
+      user:
+        name: test
+        state: present
       tags: c
-    - name: installing httpd
-      yum: name=httpd state=present
-      tags: d
-    - name: starting apache
-      service: name=httpd state=started
-      tags: e
+
+      
+#SINGLE TAG: ansible-playbook name.yml --tags a
+#MULTI TAG: ansible-playbook name.yml --tags b,c
+#SKIP TAG: ansible-playbook name.yml --skip-tags "c"
+#MULTI SKIP TAGS: ansible-playbook name.yml --skip-tags "c,d"
